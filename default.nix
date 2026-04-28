@@ -22,12 +22,13 @@
 
 let
   version = "0.7.1-unstable-2026-04-25";
-  src = fetchFromGitHub {
+  src' = fetchFromGitHub {
     owner = "ironcalc";
     repo = "ironcalc";
     rev = "f60171a2f07715e4754477b9b2a3ee9e5659ec87";
     hash = "sha256-eOvu+2AUNW2USGcnZQ73g5ofNMFJ3drwA7MIsVk41xA=";
   };
+  src = lib.cleanSource ./.;
 
   cargoHash = "sha256-q5DnqhIYKUUqfJ4/TNHYF1QgTbH198QtgirQ+lP30wk=";
 
@@ -208,7 +209,7 @@ let
     pname = "ironcalc";
     inherit version src cargoHash;
 
-    patches = [ ./0001-fix-test-message.patch ];
+    #patches = [ ./0001-fix-test-message.patch ];
 
     nativeBuildInputs = [
       pkg-config
