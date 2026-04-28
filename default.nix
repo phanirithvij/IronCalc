@@ -105,7 +105,6 @@ let
       chmod -R u+w ../../..
       mkdir -p ../../bindings/wasm/pkg
       echo '{"name": "@ironcalc/wasm", "version": "${version}"}' > ../../bindings/wasm/pkg/package.json
-      cp ${./webapp/IronCalc/package-lock.json} package-lock.json
     '';
 
     preConfigure = ''
@@ -138,8 +137,6 @@ let
       rm -rf ../../IronCalc
       cp -r ${workbook} ../../IronCalc
       chmod -R u+w ../../IronCalc
-
-      cp ${./webapp/app.ironcalc.com/frontend/package-lock.json} package-lock.json
     '';
 
     preBuild = ''
