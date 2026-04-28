@@ -22,20 +22,19 @@
 
 let
   version = "0.7.1";
-  src = fetchFromGitHub {
+  src' = fetchFromGitHub {
     owner = "ironcalc";
     repo = "ironcalc";
     tag = "v${version}";
     hash = "sha256-P2o/rft5wDOvnjsGV69kaf7L4WObwCGt+aPgzFqqdio=";
   };
+  src = lib.cleanSource ./.;
 
   cargoHash = "sha256-q5DnqhIYKUUqfJ4/TNHYF1QgTbH198QtgirQ+lP30wk=";
 
   wasm = rustPlatform.buildRustPackage {
     pname = "ironcalc-wasm";
     inherit version src cargoHash;
-
-    patches = [ ./0001-fix-test-message.patch ];
 
     nativeBuildInputs = [
       binaryen
@@ -210,7 +209,7 @@ let
     pname = "ironcalc";
     inherit version src cargoHash;
 
-    patches = [ ./0001-fix-test-message.patch ];
+    #patches = [ ./0001-fix-test-message.patch ];
 
     nativeBuildInputs = [
       pkg-config
